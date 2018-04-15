@@ -1,0 +1,187 @@
+/*Blue - #022b3a
+Queen - #477998
+Aqua - #bfdbf7
+Azureish - #e1e5f2
+Gunmetal - #1d1e2c*/
+
+body{
+  background-color: #1d1e2c;
+  overflow:hidden;
+}
+
+#mainCanvas{
+  position:absolute;
+  padding: 16px;
+  height: 90vh;
+  width: 90vw;
+  background-color: #000;
+}
+
+canvas {
+  position: absolute;
+  /* top: 0; */
+  /* left: 0; */
+  z-index:0;
+}
+
+#defaultCanvas0{
+  background-color: #2d2e3c;
+}
+
+#mapMkrCol{
+  background-color: #477998;
+  padding: 16px 0 0 16px;
+}
+
+.mapMkrColItem{
+  cursor: pointer;
+  height: 160px;
+}
+
+.mapMkrTbBtn{
+  width: 120px;
+}
+
+#mapMkrBtnHand{
+  width: 80px;
+}
+
+#mapMkrSelImg{
+  height: 128px;
+  margin: 20px;
+}
+
+#mapMkrSelImgPnl{
+  text-align: center;
+  background-color: #477998;
+  margin-bottom: 16px;
+}
+
+#gridMenu {
+  display: none;
+  visibility: hidden;
+  top: -500;
+  transition: all 500ms ease-in-out;
+}
+#gridMenu .show{
+  display: block;
+  visibility: visible;
+  height: 300px;
+  background-color: pink;
+  top: 0;
+
+}
+#gridMenu td{
+  height: 8px;
+  width: 8px;
+  border: 2px solid black;
+  margin-left: 4px;
+  margin-bottom: 4px;
+}
+#gridMenu td:hover{
+  background-color: red;
+}
+
+.hoverPointer:hover{
+  cursor: pointer;
+}
+
+.mapMkrHide{
+  display: none;
+}
+
+.mapMkrShow{
+  display: block;
+}
+
+i.material-icons{
+  font-size: 12pt;
+}
+
+.hide{
+  visibility: hidden;
+}
+.tile-item {
+  display: inline-block;
+  padding: 0;
+  margin: 0 16px 16px 0;
+  height: 60px;
+  width: 60px;
+}
+.tile-item .item-inner {
+  display: inline-block;
+  background: black;
+  height: 60px;
+  margin-right: 8px;
+  position: relative;
+}
+.tile-item img {
+  position: absolute;
+  opacity: 0.7;
+  height: 60px;
+  width: 60px;
+}
+.tile-item img:hover {
+  opacity: 1;
+}
+
+.tile-item h5 {
+  padding: 8px 0 0 8px;
+  font-size: 14px;
+  color: #fff;
+  position: relative;
+  width: 60px;
+  margin: 0;
+  float: left;
+}
+
+@media print {
+  .noPrint {
+    display: none;
+  }
+}
+#mapMkrCellImages{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,.5); /* Black w/ opacity */
+ }
+
+#mapMkrCellImages>div>ul{
+    list-style-type: none;
+    margin:0;
+    padding: 0;
+ }
+
+#mapMkrCellImagesContent{
+    position:absolute;
+    background-color: rgba(0,0,0,.5);
+    border-radius: 10px;
+}
+
+#mapMkrCellImages>div>ul>li{
+    margin: 10px;
+    cursor: pointer;
+}
+
+#mapMkrBtnSelCellImgX{
+    position: absolute;
+    clear: both;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+#toolCanvas{
+    position: absolute;
+}
+
+#toolCanvas{
+    cursor:pointer;
+}
+
