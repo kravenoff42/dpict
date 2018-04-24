@@ -1,76 +1,87 @@
 var canvas;
 var divCanvas;
+var printBtn;
+var saveBtn;
 const canvasX = 900, canvasY = 700;
+const toolX = 200;
+const borderW = 2;
+var brushSize;
 
-var drawing, erasing;
+var isDrawing, isErasing;
 
-var currentSelectImg = null;
 var pixelArr;
 
 
 var imgArr = [];
 
-
+var doodle;
+var tools;
+var brush;
 
 function setup() {
     divCanvas = select('#divCanvas');
+    printBtn = document.querySelector('#printBtn');
+    saveBtn = document.querySelector('#saveBtn');
+
+    isDrawing = false;
+    isErasing = false;
+    brushSize = 20;
+
     canvas = createCanvas(canvasX, canvasY);
     canvas.parent(divCanvas);
     
-    background(0);
     // This is by default
-    frameRate(60);
+    frameRate(90);
     // Setting the pixel density to one for now so it can be the same across devices
     window.pixelDensity(1);
     
-    drawing = false;
-    erasing = false;
-
-    var printBtn = document.querySelector('#printBtn');
+    tools = new ToolTray(toolX,canvasY,borderW);
+    doodle = new Doodle(canvasX,canvasY,toolX,borderW);
+    brush = new Brush(brushSize);
+    console.log(brush);
+    
     printBtn.addEventListener('click', printMap, false);
 
-    var saveBtn = document.querySelector('#saveBtn');
     saveBtn.addEventListener('click', saveMap, false);
 
 }
 
 function draw() {
-    background(0);
     update();
-    //render();
+    render();
 }
 
 function update() {
-
-    if (drawing) {
-        //updateCells();
-    }
-    if (!mouseIsPressed) {
-        drawing = false;
-    }
+    //console.log('update');
+    if (!isDrawing) return;
+    if(!doodle.inBounds()) return;
+    //console.log('drawing');
+    brush.update();
+    // if (drawing &&doodle.inBounds()) {
+    //     push();
+    //     fill(0);
+    //     ellipse(mouseX, mouseY,brushSize,brushSize);
+    //     pop();
+    // }
 }
 
+function render(){
+    doodle.render();
+    tools.render();
+}
+
+
 function mousePressed() {
+    brush.lastPos = createVector(mouseX,mouseY);
 
-    var cord = {
-        x: 0,
-        y: 0
-    };
-    cord.x = mouseX;
-    cord.y = mouseY;
-    cord.width = 2;
-    cord.height = 2;
-
-    // Only looking for a cell if user clicked within the canvas
-    //
-    if (cord.x < 0 + width &&
-        cord.x > 0 &&
-        cord.y < 0 + height &&
-        cord.y > 0) {
-    }
+    isDrawing = true;
+    //console.log('drawing true');
+    //brush.update();
 }
 
 function mouseReleased() {
+    isDrawing = false;
+        //console.log('drawing false');
 
 }
 
@@ -100,14 +111,14 @@ function saveMap() {
 }
 
 function selectEraser() {
-    if (!erasing) {
+    if (!isErasing) {
         document.body.style.cursor = 'crosshair';
-        erasing = true;
-        drawing = false;
+        isErasing = true;
+        isDrawing = false;
     }
     else {
         document.body.style.cursor = 'auto';
-        erasing = false;
+        isErasing = false;
     }
 }
 
